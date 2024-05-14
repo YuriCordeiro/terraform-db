@@ -19,7 +19,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: development
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -43,6 +42,9 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
+      env:
+        mongodbatlas_public_key: ${{ vars.MONGODBATLAS_PUBLIC_KEY }}
+        mongodbatlas_private_key: ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}
       run: terraform plan -input=false
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
