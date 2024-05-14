@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-manager-config
+data:
+  MONGO_CONNECTION_STRING: mongodb+srv://user-1:mQ3biTFjnUFwDi1D@order-manager-dev-clust.zy3yqac.mongodb.net/order-manager?retryWrites=true&w=majority&appName=order-manager-dev-cluster
