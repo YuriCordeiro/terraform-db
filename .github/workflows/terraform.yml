@@ -55,7 +55,7 @@ jobs:
         echo 'This is the second ${{ secrets.AWS_SECRET_ACCESS_KEY }}'
         echo 'This is the third $MY_SECRET'
         echo 'This is the fourth ${MY_SECRET}'
-        #terraform plan -input=false -var 'aws_access_key_id=AKIA6GBMCKIN6ZWNZSX7' -var 'aws_secret_access_key=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' -var 'mongodbatlas_public_key=rmnmqvor' -var 'mongodbatlas_private_key=bdafb594-735d-4739-9f84-d735f219b0e1' -var 'atlas_org_id=66412e13a227095d561615b5'
+        #terraform plan -input=false -var 'aws_access_key_id=${{ vars.AWS_ACCESS_KEY_ID }}' -var 'aws_secret_access_key=BBJoTmC1qOwQ38p6oT3MLfoTL6SWDyvfp58KfTFE' -var 'mongodbatlas_public_key=rmnmqvor' -var 'mongodbatlas_private_key=bdafb594-735d-4739-9f84-d735f219b0e1' -var 'atlas_org_id=66412e13a227095d561615b5'
       #run: terraform plan -input=false -var 'aws_access_key_id=$AWS_ACCESS_KEY_ID' -var 'aws_secret_access_key=$AWS_SECRET_ACCESS_KEY' -var 'mongodbatlas_public_key=${{ vars.MONGODBATLAS_PUBLIC_KEY }}' -var 'mongodbatlas_private_key=${{ secrets.MONGODBATLAS_PRIVATE_KEY }}' -var 'atlas_org_id=${{ vars.ATLAS_ORG_ID }}'
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
