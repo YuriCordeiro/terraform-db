@@ -19,7 +19,27 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: env
+    env:
+      ## AWS Variables
+      aws_access_key_id: $ {{vars.AWS_ACCESS_KEY_ID}}
+      aws_secret_access_key: $ {{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_region: ${{ vars.AWS_REGION }}
+      vpc_id: ${{ vars.VPC_ID }}
+      route_table_id: ${{ vars.ROUTE_TABLE_ID }}
+      subnetA: ${{ vars.SUBNETA }}
+      subnetB: ${{ vars.SUBNETB }}
+      subnetC: ${{ vars.SUBNETC }}
+      ## Atlas MongoDB Variables
+      mongodbatlas_public_key: ${{ vars.MONGODBATLAS_PUBLIC_KEY }}
+      mongodbatlas_private_key: ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}
+      atlas_org_id: ${{ vars.ATLAS_ORG_ID }}
+      atlas_project_name: ${{ vars.ATLAS_PROJECT_NAME }}
+      environment: ${{ vars.ENVIRONMENT }}
+      cluster_instance_size_name: ${{ vars.CLUSTER_INSTANCE_SIZE_NAME }}
+      cloud_provider: ${{ vars.CLOUD_PROVIDER }}
+      atlas_region: ${{ vars.ATLAS_REGION }}
+      mongodb_version: ${{vars.MONGODB_VERSION}}
+      ip_address: ${{vars.IP_ADDRESS}}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -43,9 +63,6 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      env:
-        #mongodbatlas_public_key: ${{ vars.MONGODBATLAS_PUBLIC_KEY }}
-        mongodbatlas_private_key: ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}
       run: |
         env
         terraform plan -input=false
