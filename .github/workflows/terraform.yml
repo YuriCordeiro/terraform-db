@@ -50,7 +50,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
-        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       run: terraform plan -input=false -var 'aws_access_key_id=$AWS_ACCESS_KEY_ID' -var 'aws_secret_access_key=$AWS_SECRET_ACCESS_KEY' -var 'mongodbatlas_public_key=${{ vars.MONGODBATLAS_PUBLIC_KEY }}' -var 'mongodbatlas_private_key=${{ secrets.MONGODBATLAS_PRIVATE_KEY }}' -var 'atlas_org_id=${{ vars.ATLAS_ORG_ID }}'
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
