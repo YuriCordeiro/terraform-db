@@ -34,12 +34,11 @@ jobs:
       with:
         aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: ${{ vars.AWS_REGION }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@v3
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
@@ -49,8 +48,6 @@ jobs:
         
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      env:
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       run: terraform plan -input=false -var 'aws_access_key_id=$AWS_ACCESS_KEY_ID' -var 'aws_secret_access_key=$AWS_SECRET_ACCESS_KEY' -var 'mongodbatlas_public_key=${{ vars.MONGODBATLAS_PUBLIC_KEY }}' -var 'mongodbatlas_private_key=${{ secrets.MONGODBATLAS_PRIVATE_KEY }}' -var 'atlas_org_id=${{ vars.ATLAS_ORG_ID }}'
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
