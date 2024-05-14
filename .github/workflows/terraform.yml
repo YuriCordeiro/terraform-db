@@ -19,28 +19,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    env:
-      ## AWS Variables
-      aws_access_key_id: $ {{vars.AWS_ACCESS_KEY_ID}}
-      aws_secret_access_key: $ {{ secrets.AWS_SECRET_ACCESS_KEY }}
-      aws_region: ${{ vars.AWS_REGION }}
-      vpc_id: ${{ vars.VPC_ID }}
-      route_table_id: ${{ vars.ROUTE_TABLE_ID }}
-      subnetA: ${{ vars.SUBNETA }}
-      subnetB: ${{ vars.SUBNETB }}
-      subnetC: ${{ vars.SUBNETC }}
-      ## Atlas MongoDB Variables
-      mongodbatlas_public_key: ${{ vars.MONGODBATLAS_PUBLIC_KEY }}
-      mongodbatlas_private_key: ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}
-      atlas_org_id: ${{ vars.ATLAS_ORG_ID }}
-      atlas_project_name: ${{ vars.ATLAS_PROJECT_NAME }}
-      environment: ${{ vars.ENVIRONMENT }}
-      cluster_instance_size_name: ${{ vars.CLUSTER_INSTANCE_SIZE_NAME }}
-      cloud_provider: ${{ vars.CLOUD_PROVIDER }}
-      atlas_region: ${{ vars.ATLAS_REGION }}
-      mongodb_version: ${{vars.MONGODB_VERSION}}
-      ip_address: ${{vars.IP_ADDRESS}}
-
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -60,19 +38,10 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-
-    # - name: Terraform Plan
-    #   uses: hashicorp/terraform-github-actions@master
-    #   with: 
-    #     tf_actions_version: 0.12.13
-    #     tf_actions_subcommand: 'plan'
-    #     tf_actions_working_dir: '.'
-    #     tf_actions_comment: true
-    #     args: '-var="subnetA=${{vars.SUBNETA}}" -var="subnetB=${{vars.SUBNETB}} -var="subnetC=${{vars.SUBNETC}}"'
         
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false var='aws_access_key_id=${{vars.AWS_ACCESS_KEY_ID}}' var='aws_secret_access_key= $ {{ secrets.AWS_SECRET_ACCESS_KEY }}' var='aws_region= ${{ vars.AWS_REGION }}' var='vpc_id= ${{ vars.VPC_ID }}' var=var='route_table_id= ${{ vars.ROUTE_TABLE_ID }}' var='subnetA= ${{ vars.SUBNETA }}' var='subnetB= ${{ vars.SUBNETB }}' var='subnetC= ${{ vars.SUBNETC }}' var='mongodbatlas_public_key= ${{ vars.MONGODBATLAS_PUBLIC_KEY }}' var=var='mongodbatlas_private_key= ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}' var='atlas_org_id= ${{ vars.ATLAS_ORG_ID }}' var='atlas_project_name= ${{ vars.ATLAS_PROJECT_NAME }}' var='environment= ${{ vars.ENVIRONMENT }}' var='cluster_instance_size_name= ${{ vars.CLUSTER_INSTANCE_SIZE_NAME }}' var='cloud_provider= ${{ vars.CLOUD_PROVIDER }}' var='atlas_region= ${{ vars.ATLAS_REGION }}' var='mongodb_version= ${{vars.MONGODB_VERSION}}' var='ip_address= ${{vars.IP_ADDRESS}}'
+      run: terraform plan -input=false var='aws_access_key_id=${{vars.AWS_ACCESS_KEY_ID}}' var='aws_secret_access_key= ${{ secrets.AWS_SECRET_ACCESS_KEY }}' var='mongodbatlas_public_key= ${{ vars.MONGODBATLAS_PUBLIC_KEY }}' var=var='mongodbatlas_private_key= ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}' var='atlas_org_id= ${{ vars.ATLAS_ORG_ID }}'
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
