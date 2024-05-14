@@ -45,29 +45,35 @@ variable "ip_address" {
   description = "IP address used to access Atlas cluster"
 }
 
-# # Mongodb atlas public key
-# variable "mongodb_atlas_public_key" {
-#   type = string
-#   description = "Mongodb atlas API public key"
-# }
+# Mongodb atlas public key
+variable "mongodbatlas_public_key" {
+  type = string
+  description = "Mongodb atlas API public key"
+}
 
-# # Mongodb atlas private key
-# variable "mongodb_atlas_private_key" {
-#   type = string
-#   description = "# Mongodb atlas API private key"
-# }
+# Mongodb atlas private key
+variable "mongodbatlas_private_key" {
+  type = string
+  description = "# Mongodb atlas API private key"
+}
+
+# AWS public key
+variable "aws_access_key_id" {
+  type = string
+  description = "AWS public key"
+}
+
+# AWS secret key
+variable "aws_secret_access_key" {
+  type = string
+  description = "# AWS secret key"
+}
 
 # AWS Region
 variable "aws_region" {
   type = string
   description = "AWS Region"
 }
-
-# # Internet Gateway ID
-# variable "internet_gateway_id" {
-#   type = string
-#   description = "Internet Gateway ID"
-# }
 
 variable "vpc_id" {
   type = string
