@@ -72,7 +72,7 @@ jobs:
         
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false -var='subnetA=${{vars.SUBNETA}}' -var='subnetB=${{vars.SUBNETB}}' -var='subnetC=${{vars.SUBNETC}}'
+      run: terraform plan -input=false var='aws_access_key_id=${{vars.AWS_ACCESS_KEY_ID}}' var='aws_secret_access_key= $ {{ secrets.AWS_SECRET_ACCESS_KEY }}' var='aws_region= ${{ vars.AWS_REGION }}' var='vpc_id= ${{ vars.VPC_ID }}' var=var='route_table_id= ${{ vars.ROUTE_TABLE_ID }}' var='subnetA= ${{ vars.SUBNETA }}' var='subnetB= ${{ vars.SUBNETB }}' var='subnetC= ${{ vars.SUBNETC }}' var='mongodbatlas_public_key= ${{ vars.MONGODBATLAS_PUBLIC_KEY }}' var=var='mongodbatlas_private_key= ${{ secrets.MONGODBATLAS_PRIVATE_KEY }}' var='atlas_org_id= ${{ vars.ATLAS_ORG_ID }}' var='atlas_project_name= ${{ vars.ATLAS_PROJECT_NAME }}' var='environment= ${{ vars.ENVIRONMENT }}' var='cluster_instance_size_name= ${{ vars.CLUSTER_INSTANCE_SIZE_NAME }}' var='cloud_provider= ${{ vars.CLOUD_PROVIDER }}' var='atlas_region= ${{ vars.ATLAS_REGION }}' var='mongodb_version= ${{vars.MONGODB_VERSION}}' var='ip_address= ${{vars.IP_ADDRESS}}'
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
